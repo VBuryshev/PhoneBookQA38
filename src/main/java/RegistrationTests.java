@@ -20,10 +20,8 @@ public class RegistrationTests
         wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
-}
-
 @Test
-public void registrationPositive()
+public void registrationPositiveTest()
 {
     // open login form
     wd.findElement(By.xpath("//*[.='LOGIN']")).click();
@@ -41,13 +39,37 @@ public void registrationPositive()
     passInput.clear();
     passInput.sendKeys("Act123456$");
 
-    // click on Button Login
-    wd.findElement(By.xpath("//button[1]")).click();
+    // click on Button Registration
+    wd.findElement(By.xpath("//button[2]")).click();
 }
+    //HW_05 RegNegativeTest
+    @Test
+    public void registrationNegativeTestWithoutSpecialSymbolInPassword()
+    {
+        // open login form
+        wd.findElement(By.xpath("//*[.='LOGIN']")).click();
+
+        int i = (int)(System.currentTimeMillis()/1000)%3600;
+        // fill email
+        WebElement emailInput = wd.findElement(By.xpath("//input[1]"));
+        emailInput.click();
+        emailInput.clear();
+        emailInput.sendKeys("testlg" + i + "@mail.com");
+
+        //fill password
+        WebElement passInput = wd.findElement(By.xpath("//input[2]"));
+        passInput.click();
+        passInput.clear();
+        passInput.sendKeys("Act123456");
+
+        // click on Button Registration
+        wd.findElement(By.xpath("//button[2]")).click();
+    }
 
 
-@AfterMethod
-public void tearDown()
-{
-    //wd.close();
+    @AfterMethod
+    public void tearDown()
+    {
+        //wd.close();
+    }
 }

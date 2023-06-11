@@ -48,7 +48,7 @@ public class LoginTests
 
     }
     @Test
-    public void loginNegative()
+    public void loginNegativeTestWrongEmail()
 
     {
         // open login form
@@ -68,6 +68,9 @@ public class LoginTests
 
         // click on Button Login
         wd.findElement(By.xpath("//button[1]")).click();
+
+        //Assert
+
     }
 
     @AfterMethod
