@@ -85,6 +85,17 @@ public void registrationPositiveTest()
         submitRegistration();
     }
 
+    //HW_06_Task1
+    @Test
+    public void registrationNegativeWrongPassword()
+    {
+        int i = (int)(System.currentTimeMillis()/1000)%3600;
+        String email = "testlg" + i + "@mail.com", password = "act123456";
+        openLoginForm();
+        fillLoginForm(email, password);
+        submitRegistration();
+    }
+
     @AfterMethod
     public void tearDown()
     {

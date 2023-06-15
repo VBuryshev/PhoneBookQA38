@@ -9,17 +9,17 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class LoginTests
+public class LoginTests extends TestBase
 {
-    WebDriver wd;
-
-    @BeforeMethod
-    public void init()
-    {
-        wd = new ChromeDriver();
-        wd.navigate().to("https://telranedu.web.app/home");
-        wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-    }
+//    WebDriver wd;
+//
+//    @BeforeMethod
+//    public void init()
+//    {
+//        wd = new ChromeDriver();
+//        wd.navigate().to("https://telranedu.web.app/home");
+//        wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+//    }
 
     @Test
     public void loginPositiveTest()
@@ -72,6 +72,16 @@ public class LoginTests
         //Assert
 
     }
+    //HW_06_Task_2
+    @Test
+    public void loginNegativeTestWrongPassword()
+     {
+         int i = (int)(System.currentTimeMillis()/1000)%3600;
+         String email = "testlg" + i + "mail.com", password = "act123456";
+         openLoginForm();
+         fillLoginForm(email, password);
+         submitLogin();
+     }
 
     @AfterMethod
     public void tearDown()

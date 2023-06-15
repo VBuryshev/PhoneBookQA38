@@ -69,4 +69,8 @@ public class TestBase
         return wd.findElements(locator).size() > 0;
     }
 
+    public void submitLogin()
+    {
+        click(By.xpath("//button[1]"));
+    }
 }
