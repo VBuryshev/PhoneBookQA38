@@ -1,5 +1,6 @@
 package tests;
 
+import models.User;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -19,9 +20,11 @@ public class RegistrationTests extends TestBase
     public void registrationPositiveTest()
     {
         int i = (int)(System.currentTimeMillis()/1000)%3600;
-        String email = "testlg" + i + "@mail.com", password = "Act123456789$";
+        User user = new User()
+                .withEmail("testlg" + i + "@mail.com")
+                .withPassword("Act123456$");
         app.getUser().openLoginForm();
-        app.getUser().fillLoginForm(email, password);
+        app.getUser().fillLoginForm(user);
         app.getUser().submitRegistration();
         app.getUser().pause(5000);
         Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//button")));
@@ -30,10 +33,11 @@ public class RegistrationTests extends TestBase
     @Test
     public void registrationNegativeTestWithoutSpecialSymbolInPassword()
     {
-        String email = "testlg" + (int)(System.currentTimeMillis()/1000)%3600;
-        String password = "Act123456";
+        User user = new User()
+                .withEmail("testlg" + (int)(System.currentTimeMillis()/1000)%3600 + "@mail.com")
+                .withPassword("Act123456");
         app.getUser().openLoginForm();
-        app.getUser().fillLoginForm(email, password);
+        app.getUser().fillLoginForm(user);
         app.getUser().submitRegistration();
         app.getUser().pause(5000);
         //Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//button")));
@@ -42,11 +46,13 @@ public class RegistrationTests extends TestBase
     @Test
     public void registrationNegativeWrongEmail()
     {
-        int i = (int)(System.currentTimeMillis()/1000)%3600;
-        String email = "testlg" + i + "mail.com", password = "Act123456";
+        User user = new User()
+                .withEmail("testlg" + (int)(System.currentTimeMillis()/1000)%3600 + "mail.com")
+                .withPassword("Act123456$");
         app.getUser().openLoginForm();
-        app.getUser().fillLoginForm(email, password);
+        app.getUser().fillLoginForm(user);
         app.getUser().submitRegistration();
+        app.getUser().pause(5000);
         //Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//button")));
     }
 
@@ -54,11 +60,13 @@ public class RegistrationTests extends TestBase
     @Test
     public void registrationNegativeWrongPassword()
     {
-        int i = (int)(System.currentTimeMillis()/1000)%3600;
-        String email = "testlg" + i + "@mail.com", password = "act123456";
+        User user = new User()
+                .withEmail("testlg" + (int)(System.currentTimeMillis()/1000)%3600 + "@mail.com")
+                .withPassword("act123456$");
         app.getUser().openLoginForm();
-        app.getUser().fillLoginForm(email, password);
+        app.getUser().fillLoginForm(user);
         app.getUser().submitRegistration();
+        app.getUser().pause(5000);
         //Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//button")));
     }
 

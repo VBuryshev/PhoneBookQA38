@@ -1,5 +1,6 @@
 package tests;
 
+import models.User;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -17,20 +18,27 @@ public class LoginTests extends TestBase
     @Test
     public void loginPositiveTest()
     {
-        String email = "testlg@mail.com", password = "Act123456$";
+        User user = new User()
+                .withEmail("testlg@mail.com")
+                .withPassword("Act123456$");
         app.getUser().openLoginForm();
-        app.getUser().fillLoginForm(email, password);
+        app.getUser().fillLoginForm(user);
         app.getUser().submitLogin();
         app.getUser().pause(3000);
         Assert.assertTrue(app.getUser().isLogged());
+
+
+
    }
     @Test
     public void loginNegativeTestWrongEmail()
 
     {
-        String email = "testlgmail.com", password = "Act12345$";
+        User user = new User()
+                .withEmail("testlg@mail.com")
+                .withPassword("Act123456$");
         app.getUser().openLoginForm();
-        app.getUser().fillLoginForm(email, password);
+        app.getUser().fillLoginForm(user);
         app.getUser().submitLogin();
         app.getUser().pause(3000);
         //Assert
@@ -40,9 +48,11 @@ public class LoginTests extends TestBase
     public void loginNegativeTestWrongPassword()
      {
 
-         String email = "vasya@gmail.com", password = "Act12345";
+         User user = new User()
+                 .withEmail("testlg@mail.com")
+                 .withPassword("Act123456$");
          app.getUser().openLoginForm();
-         app.getUser().fillLoginForm(email, password);
+         app.getUser().fillLoginForm(user);
          app.getUser().submitLogin();
          app.getUser().pause(3000);
          //Assert
