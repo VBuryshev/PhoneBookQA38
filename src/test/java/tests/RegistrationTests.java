@@ -19,10 +19,10 @@ public class RegistrationTests extends TestBase
     @Test
     public void registrationPositiveTest()
     {
-        int i = (int)(System.currentTimeMillis()/1000)%3600;
-        User user = new User()
-                .withEmail("testlg" + i + "@mail.com")
-                .withPassword("Act123456$");
+        User user = User.builder()
+                        .email("testlg" + (int)(System.currentTimeMillis()/1000)%3600 + "@mail.com")
+                        .password("Act123456$")
+                        .build();
         app.getUser().openLoginForm();
         app.getUser().fillLoginForm(user);
         app.getUser().submitRegistration();
@@ -33,9 +33,10 @@ public class RegistrationTests extends TestBase
     @Test
     public void registrationNegativeTestWithoutSpecialSymbolInPassword()
     {
-        User user = new User()
-                .withEmail("testlg" + (int)(System.currentTimeMillis()/1000)%3600 + "@mail.com")
-                .withPassword("Act123456");
+        User user = User.builder()
+                        .email("testlg" + (int)(System.currentTimeMillis()/1000)%3600 + "@mail.com")
+                        .password("Act123456")
+                        .build();
         app.getUser().openLoginForm();
         app.getUser().fillLoginForm(user);
         app.getUser().submitRegistration();
@@ -46,9 +47,10 @@ public class RegistrationTests extends TestBase
     @Test
     public void registrationNegativeWrongEmail()
     {
-        User user = new User()
-                .withEmail("testlg" + (int)(System.currentTimeMillis()/1000)%3600 + "mail.com")
-                .withPassword("Act123456$");
+        User user = User.builder()
+                        .email("testlg" + (int)(System.currentTimeMillis()/1000)%3600 + "mail.com")
+                        .password("Act123456")
+                        .build();
         app.getUser().openLoginForm();
         app.getUser().fillLoginForm(user);
         app.getUser().submitRegistration();
@@ -56,13 +58,14 @@ public class RegistrationTests extends TestBase
         //Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//button")));
     }
 
-    //HW_06_Task1
+
     @Test
     public void registrationNegativeWrongPassword()
     {
-        User user = new User()
-                .withEmail("testlg" + (int)(System.currentTimeMillis()/1000)%3600 + "@mail.com")
-                .withPassword("act123456$");
+        User user = User.builder()
+                        .email("testlg" + (int)(System.currentTimeMillis()/1000)%3600 + "@mail.com")
+                        .password("Act123456")
+                        .build();
         app.getUser().openLoginForm();
         app.getUser().fillLoginForm(user);
         app.getUser().submitRegistration();

@@ -18,9 +18,10 @@ public class LoginTests extends TestBase
     @Test
     public void loginPositiveTest()
     {
-        User user = new User()
-                .withEmail("testlg@mail.com")
-                .withPassword("Act123456$");
+        User user = User.builder()
+                .email("testlg@mail.com")
+                .password("Act123456$")
+                .build();
         app.getUser().openLoginForm();
         app.getUser().fillLoginForm(user);
         app.getUser().submitLogin();
@@ -34,9 +35,10 @@ public class LoginTests extends TestBase
     public void loginNegativeTestWrongEmail()
 
     {
-        User user = new User()
-                .withEmail("testlg@mail.com")
-                .withPassword("Act123456$");
+        User user = User.builder()
+                .email("testlg@mail.com")
+                .password("Act123456$")
+                .build();
         app.getUser().openLoginForm();
         app.getUser().fillLoginForm(user);
         app.getUser().submitLogin();
@@ -48,9 +50,10 @@ public class LoginTests extends TestBase
     public void loginNegativeTestWrongPassword()
      {
 
-         User user = new User()
-                 .withEmail("testlg@mail.com")
-                 .withPassword("Act123456$");
+         User user = User.builder()
+                 .email("testlg@mail.com")
+                 .password("Act123456$")
+                 .build();
          app.getUser().openLoginForm();
          app.getUser().fillLoginForm(user);
          app.getUser().submitLogin();
