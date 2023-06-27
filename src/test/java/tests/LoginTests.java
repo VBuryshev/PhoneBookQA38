@@ -43,7 +43,7 @@ public class LoginTests extends TestBase
         app.getUser().fillLoginForm(user);
         app.getUser().submitLogin();
         app.getUser().pause(3000);
-        //Assert
+        Assert.assertTrue(app.getUser().isWrongFormatMessage());
 
     }
     @Test
@@ -52,13 +52,13 @@ public class LoginTests extends TestBase
 
          User user = User.builder()
                  .email("testlg@mail.com")
-                 .password("Act123456$")
+                 .password("Act123456")
                  .build();
          app.getUser().openLoginForm();
          app.getUser().fillLoginForm(user);
          app.getUser().submitLogin();
          app.getUser().pause(3000);
-         //Assert
+         //Assert.assertTrue(app.getUser().isAlertPresent());
   }
 
 }
