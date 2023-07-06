@@ -1,6 +1,7 @@
 package tests;
 
 import manager.ApplicationManager;
+import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterMethod;

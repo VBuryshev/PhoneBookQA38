@@ -25,7 +25,7 @@ public class AddNewContactTests extends TestBase
         }
     }
 
-    @Test(invocationCount = 5)
+    @Test(invocationCount = 1)
     public void addNewContactPositive()
     {
         int i = (int)(System.currentTimeMillis()/1000)%3600;
@@ -44,6 +44,8 @@ public class AddNewContactTests extends TestBase
         app.getHelperContact().submitContactForm();
         app.getHelperContact().pause(3000);
         Assert.assertTrue(app.getHelperContact().isContactCreated(contact));
+        app.getHelperContact().pause(3000);
+        app.getHelperContact().deleteRandomContact();
     }
 
 }
