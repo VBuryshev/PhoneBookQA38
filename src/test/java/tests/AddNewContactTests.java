@@ -13,7 +13,7 @@ public class AddNewContactTests extends TestBase
 {
     Logger logger = LoggerFactory.getLogger(AddNewContactTests.class);
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void precondition()
     {
         if(!app.getUser().isLogged())
@@ -25,7 +25,7 @@ public class AddNewContactTests extends TestBase
         }
     }
 
-    @Test(invocationCount = 1)
+    @Test(invocationCount = 1, groups = {"positive"})
     public void addNewContactPositive()
     {
         int i = (int)(System.currentTimeMillis()/1000)%3600;
@@ -45,7 +45,6 @@ public class AddNewContactTests extends TestBase
         app.getHelperContact().pause(3000);
         Assert.assertTrue(app.getHelperContact().isContactCreated(contact));
         app.getHelperContact().pause(3000);
-        app.getHelperContact().deleteRandomContact();
     }
 
 }
