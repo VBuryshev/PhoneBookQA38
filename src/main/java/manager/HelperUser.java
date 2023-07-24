@@ -1,76 +1,60 @@
 package manager;
 
-import models.User;
+import model.User;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class HelperUser extends HelperBase
+public class HelperUser extends HelperBase{
 
-{
-
-    public HelperUser(WebDriver wd)
-    {
+    public HelperUser(WebDriver wd) {
         super(wd);
     }
 
-    public void openLoginForm()
-    {
+    public void openLoginForm(){
         wd.findElement(By.xpath("//*[.='LOGIN']")).click();
     }
 
-    public void fillLoginForm(String email, String password)
-    {
-        type(By.xpath("//input[1]"),email);
+    public void fillLoginForm(String email, String password){
+        type(By.xpath("//input[1]"), email);
         type(By.xpath("//input[2]"), password);
-        //type(By.xpath("input[2]"), password); //slomano dlya loffer screenshot test
+//        type(By.xpath("input[2]"), password);
     }
-
-    public void fillLoginForm(User user)
-    {
-        type(By.xpath("//input[1]"),user.getEmail());
+    public void fillLoginForm(User user){
+        type(By.xpath("//input[1]"), user.getEmail());
         type(By.xpath("//input[2]"), user.getPassword());
-        //type(By.xpath("input[2]"), user.getPassword()); //slomano dlya loffer screenshot test
     }
 
-    public void submitRegistration()
-    {
+    public void submitRegistration(){
         click(By.xpath("//button[2]"));
     }
 
-    public void submitLogin()
-    {
+    public void submitLogin(){
         click(By.xpath("//button[1]"));
     }
 
-    public void logout()
-    {
+    public void logout(){
         click(By.xpath("//*[.='Sign Out']"));
     }
-    public boolean isLogged()
-    {
+
+    public boolean isLogged(){
         return isElementPresent(By.xpath("//*[.='Sign Out']"));
     }
 
-    public boolean isAlertPresent()
-    {
-        Alert alert = new WebDriverWait(wd,5)
+    public boolean isAlertPresent(){
+        Alert alert = new WebDriverWait(wd, 10)
                 .until(ExpectedConditions.alertIsPresent());
-        if (alert == null)
-            return false;
+        if(alert == null) return false;
         wd.switchTo().alert();
-        System.out.println(alert.getText());
+//        System.out.println(alert.getText());
         alert.accept();
         return true;
     }
-
-    public boolean isWrongFormatMessage()
-    {
-        Alert alert = new WebDriverWait(wd,5)
+    public boolean isWrongFormatMessage(){
+        Alert alert = new WebDriverWait(wd, 10)
                 .until(ExpectedConditions.alertIsPresent());
         return alert.getText().contains("Wrong email or password");
     }
-
 }

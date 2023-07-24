@@ -2,7 +2,6 @@ package manager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
@@ -13,47 +12,37 @@ import org.testng.annotations.BeforeSuite;
 
 import java.util.concurrent.TimeUnit;
 
-public class ApplicationManager
-{
+public class ApplicationManager {
+
     Logger logger = LoggerFactory.getLogger(ApplicationManager.class);
-
-//    WebDriver wd;
-
+    //    WebDriver wd;
     EventFiringWebDriver wd;
     HelperUser user;
     HelperContact helperContact;
 
     String browser;
 
-    public ApplicationManager(String browser)
-    {
+    public ApplicationManager(String browser) {
         this.browser = browser;
     }
 
-    public HelperUser getUser()
-    {
+    public HelperUser getUser() {
         return user;
     }
 
-    public HelperContact getHelperContact()
-    {
+    public HelperContact getHelperContact() {
         return helperContact;
     }
 
-    @BeforeSuite
-    public void init()
-    {
-
-        if(browser.equals(BrowserType.CHROME))
-        {
+    //    @BeforeSuite
+    public void init(){
+//        wd = new ChromeDriver();
+        if(browser.equals(BrowserType.CHROME)){
             wd = new EventFiringWebDriver(new ChromeDriver());
-            logger.info("TESTS START ON CHROME");
-
-        }
-        else if(browser.equals(BrowserType.FIREFOX))
-        {
+            logger.info("Tests start on Chrome");
+        } else if (browser.equals(BrowserType.FIREFOX)) {
             wd = new EventFiringWebDriver(new FirefoxDriver());
-            logger.info("TESTS START ON FIREFOX");
+            logger.info("Tests start on FireFox");
         }
         wd.register(new WebDriverListener());
         user = new HelperUser(wd);
@@ -63,8 +52,7 @@ public class ApplicationManager
     }
 
     @AfterSuite
-    public void tearDown()
-    {
+    public void tearDown(){
 //        wd.quit();
     }
 }
